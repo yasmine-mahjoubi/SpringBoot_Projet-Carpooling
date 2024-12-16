@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <!-- Lien vers Font Awesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Ajouter le CSS de Swiper -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <style>
         /* Global styles */
         body {
@@ -233,82 +235,54 @@
     </div>
 </section>
 
-<!-- User Reviews Section -->
+<<!-- User Reviews Section avec Swiper -->
 <section class="reviews-section">
     <div class="container mt-5">
         <h2 class="text-center mb-4" style="color: #333;">What our users say</h2>
-        <div class="row">
-            <!-- Review Card 1 -->
-            <div class="col-md-4">
-                <div class="review-card text-center p-4 shadow-sm">
-                    <div class="circle-icon mb-3">
-                        <i class="fas fa-user-circle fa-3x"></i>
-                    </div>
-                    <h5 class="fw-bold">Fattoum Mhadhbi</h5>
-                    <p>"Fantastic experience! The platform is easy to use, and I always find reliable rides."</p>
-                    <div class="stars mb-2">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star-half-alt text-warning"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Review Card 2 -->
-            <div class="col-md-4">
-                <div class="review-card text-center p-4 shadow-sm">
-                    <div class="circle-icon mb-3">
-                        <i class="fas fa-user-circle fa-3x"></i>
-                    </div>
-                    <h5 class="fw-bold">Mayssa ch</h5>
-                    <p>"Very convenient and safe. I use it regularly for my daily commutes. Highly recommended!"</p>
-                    <div class="stars mb-2">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
+        <div class="swiper">
+            <!-- Swiper Wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Review Card 1 -->
+                <div class="swiper-slide">
+                    <div class="review-card text-center p-4 shadow-sm">
+                        <div class="circle-icon mb-3">
+                            <i class="fas fa-user-circle fa-3x"></i>
+                        </div>
+                        <h5 class="fw-bold">Fattoum Mhadhbi</h5>
+                        <p>"Fantastic experience! The platform is easy to use, and I always find reliable rides."</p>
+                        <div class="stars mb-2">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star-half-alt text-warning"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Review Card 3 -->
-            <div class="col-md-4">
-                <div class="review-card text-center p-4 shadow-sm">
-                    <div class="circle-icon mb-3">
-                        <i class="fas fa-user-circle fa-3x"></i>
-                    </div>
-                    <h5 class="fw-bold">Ele Ben Ameur</h5>
-                    <p>"The best carpooling app out there! Great community and excellent service."</p>
-                    <div class="stars mb-2">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="far fa-star text-warning"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Review Card 4 -->
-            <div class="col-md-4">
-                <div class="review-card text-center p-4 shadow-sm">
-                    <div class="circle-icon mb-3">
-                        <i class="fas fa-user-circle fa-3x"></i>
-                    </div>
-                    <h5 class="fw-bold">Ayet ben Mohamed</h5>
-                    <p>"Very convenient and safe. I use it regularly for my daily commutes. Highly recommended!"</p>
-                    <div class="stars mb-2">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
+                <!-- Review Card 2 -->
+                <div class="swiper-slide">
+                    <div class="review-card text-center p-4 shadow-sm">
+                        <div class="circle-icon mb-3">
+                            <i class="fas fa-user-circle fa-3x"></i>
+                        </div>
+                        <h5 class="fw-bold">Mayssa ch</h5>
+                        <p>"Very convenient and safe. I use it regularly for my daily commutes. Highly recommended!"</p>
+                        <div class="stars mb-2">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
                     </div>
                 </div>
+                <!-- Ajoutez d'autres cartes ici -->
             </div>
+            <!-- Swiper Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Swiper Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
         </div>
     </div>
 </section>
@@ -316,5 +290,27 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<!-- Ajouter le JS de Swiper -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    // Initialiser Swiper
+    const swiper = new Swiper('.swiper', {
+        loop: true, // Boucle infinie
+        autoplay: {
+            delay: 3000, // Délai entre les slides (en millisecondes)
+            disableOnInteraction: false, // Continuer même après une interaction
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        slidesPerView: 1, // Nombre de cartes visibles
+        spaceBetween: 20, // Espacement entre les slides
+    });
+</script>
 </body>
 </html>
