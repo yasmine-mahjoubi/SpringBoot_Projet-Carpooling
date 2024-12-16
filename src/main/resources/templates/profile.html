@@ -1,10 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Profile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+            color: #333;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-container {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 90%;
+            max-width: 800px;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .profile-header {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            border-bottom: 5px solid #00aaff;
+        }
+
+        .profile-header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .profile-body {
+            padding: 2rem;
+        }
+
+        .profile-info {
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-info i {
+            color: #0072ff;
+            margin-right: 10px;
+        }
+
+        .profile-info p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .rating-container {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .rating-container .stars {
+            color: #f8d42c;
+            font-size: 1.5rem;
+        }
+
+        .animated-btn {
+            background-color: #00aaff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .animated-btn:hover {
+            background-color: #0072ff;
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
 
+<div class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <h1><i class="fas fa-user-circle"></i> User Profile</h1>
+        <p>Welcome, <span th:text="${loggedInUser.firstName + ' ' + loggedInUser.lastName}"></span>!</p>
+    </div>
+
+    <!-- Profile Body -->
+    <div class="profile-body">
+        <!-- Personal Info -->
+        <div class="profile-info">
+            <p><i class="fas fa-envelope"></i>Email: <span th:text="${loggedInUser.email}"></span></p>
+        </div>
+        <div class="profile-info">
+            <p><i class="fas fa-phone"></i>Phone Number: <span th:text="${loggedInUser.phoneNumber}"></span></p>
+        </div>
+        <div class="profile-info">
+            <p><i class="fas fa-star"></i>Average Rating: <span th:text="${loggedInUser.averageRating}"></span></p>
+        </div>
+
+        <!-- User Rides and Reservations -->
+        <div class="profile-info">
+            <p><i class="fas fa-car"></i>Total Rides: <span th:text="${#lists.size(loggedInUser.rides)}"></span></p>
+        </div>
+        <div class="profile-info">
+            <p><i class="fas fa-ticket-alt"></i>Reservations: <span th:text="${#lists.size(loggedInUser.reservations)}"></span></p>
+        </div>
+
+        <!-- Rating Stars -->
+        <div class="rating-container">
+            <p>Your Rating:</p>
+            <div class="stars">
+                <i class="fas fa-star" th:each="i : ${#numbers.sequence(1, 5)}"
+                   th:classappend="${i <= loggedInUser.averageRating} ? 'fas' : 'far'"></i>
+            </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="text-center mt-4">
+            <button class="animated-btn">Edit Profile</button>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Bundle JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
