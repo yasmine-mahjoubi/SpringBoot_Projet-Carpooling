@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservations</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(to right, #83a4d4, #b6fbff);
+      color: #333;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    header {
+      background: #7bb6d6;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    header .btn {
+      background: #7bb6d6;
+      border: none;
+    }
+
+    .container {
+      margin-top: 20px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      color: #0970e6;
+      margin-bottom: 30px;
+    }
+    h2{
+      margin-bottom: 10px;
+      margin-left: 40px;
+    }
+
+    table {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    table th, table td {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    table thead {
+      background: #86cfea;
+      color: white;
+    }
+
+    table tbody tr {
+      transition: transform 0.2s;
+    }
+
+    table tbody tr:hover {
+      transform: scale(1.02);
+      background: #ffe4d3;
+    }
+
+    .btn-danger {
+      background: #dc3545;
+      border: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .div1{
+      margin-right: 40px;
+    }
+
+    .btn-danger:hover {
+      background: #c82333;
+      transform: translateY(-2px);
+    }
+    /* Modal Custom Styles */
+    .modal-content {
+      border-radius: 15px;
+      background: #fefefe;
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+      animation: slideIn 0.5s ease-in-out;
+    }
+
+    .modal-header {
+      background: linear-gradient(to right, #83a4d4, #b6fbff);
+      color: #fff;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      text-align: center;
+    }
+
+    .modal-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: bold;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-body {
+      font-family: 'Poppins', sans-serif;
+      color: #555;
+    }
+
+    .btn-cute-reserve {
+      background-color: #4682b4;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn-cute-reserve:hover {
+      background-color: #b3e6f8;
+      color: #555;
+      transform: translateY(-2px);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Input Hover Effects */
+    .form-control {
+      border: 2px solid #6bbdc5;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #29dcdc;
+      box-shadow: 0 0 8px rgba(246, 246, 246, 0.93);
+    }
+
+    /* Slide-in Animation for Modal */
+    @keyframes slideIn {
+      0% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    /* Style des étoiles */
+    .star {
+      font-size: 2rem;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    }
+
+    .star:hover, .star.active {
+      color: #f8d64e; /* Couleur jaune pour les étoiles sélectionnées */
+      transform: scale(1.2);
+    }
+
+
+  </style>
+</head>
+<body>
+<header>
+  <h2>RideWave</h2>
+  <div class="div1">
+    <a th:href="@{/}" class="btn btn-primary"> Home</a>
+    <a th:href="@{/AllUsers}" class="btn btn-primary" style="margin-left: 13px"><i class="fas fa-users"></i></a>
+  </div>
+</header>
+<div class="container">
+  <h1><i class="fas fa-calendar-check"></i> Reservations</h1>
+  <a th:href="@{/searchRides}" class="btn btn-primary mb-4"><i class="fas fa-plus-circle"></i> Add New Reservation</a>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>User</th>
+      <th>Driver</th>
+      <th>Places Reserved</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reservation : ${listReservations}">
+      <td>
+        <i class="fas fa-user"></i>
+        <span th:text="${reservation.user.firstName + ' ' + reservation.user.lastName}"></span>
+      </td>
+      <td>
+        <i class="fas fa-id-badge"></i>
+        <span th:text="${reservation.ride.driver.firstName + ' ' + reservation.ride.driver.lastName}"></span>
+      </td>
+      <td>
+        <i class="fas fa-chair"></i>
+        <span th:text="${reservation.nbReservedPlaces}"></span>
+      </td>
+      <td>
+        <i class="fas fa-clock"></i>
+        <span th:text="${reservation.ride.getDepartureDate()}"></span>
+      </td>
+      <td>
+        <form >
+          <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                  data-bs-target="#reviewModal"
+                  th:attr="data-ride-id=${reservation.ride.getId()}, data-user-id=${reservation.user.getId()}"></i> Review</button>
+        </form>
+        <form th:action="@{/deleteReservation}" method="post">
+          <input type="hidden" name="id" th:value="${reservation.id}">
+          <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>        </button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Modal Structure -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reviewLabel">Share Your Review  🚗✨</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Corrected Form -->
+        <form id="reviewForm" th:action="@{/addReview}" method="POST">
+          <!-- Hidden Inputs for rideId and userId -->
+          <input type="hidden" id="rideId" name="rideId" value="">
+          <input type="hidden" id="userId" name="userId" value="">
+
+          <!-- Rating Input -->
+          <!-- Rating Input avec étoiles interactives -->
+          <div class="mb-3 text-center">
+            <label for="rating" class="form-label">How many stars would you give your experience?</label>
+            <div id="star-rating" class="text-center">
+              <i class="fas fa-star star" data-value="1"></i>
+              <i class="fas fa-star star" data-value="2"></i>
+              <i class="fas fa-star star" data-value="3"></i>
+              <i class="fas fa-star star" data-value="4"></i>
+              <i class="fas fa-star star" data-value="5"></i>
+            </div>
+            <!-- Champ caché pour transmettre le rating -->
+            <input type="hidden" id="rating" name="rating" value="0">
+          </div>
+
+
+          <!-- Comment Input -->
+          <div class="mb-3">
+            <label for="comment" class="form-label">Share your feedback about your experience </label>
+            <textarea class="form-control" id="comment" name="comment"></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="text-center">
+            <button type="submit" class="btn btn-cute-reserve">Submit</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const reserveModal = document.getElementById('reviewModal');
+    reserveModal.addEventListener('show.bs.modal', function (event) {
+      const button = event.relatedTarget; // Le bouton qui a ouvert la modal
+      const rideId = button.getAttribute('data-ride-id');
+      const userId = button.getAttribute('data-user-id');
+
+      // Remplir les champs cachés dans le formulaire
+      document.getElementById('rideId').value = rideId;
+      document.getElementById('userId').value = userId;
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('rating');
+
+    stars.forEach((star) => {
+      star.addEventListener('click', function () {
+        const value = this.getAttribute('data-value');
+        ratingInput.value = value;
+
+        // Mettre à jour l'affichage des étoiles
+        stars.forEach((s, index) => {
+          if (index < value) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+      });
+
+      // Survol des étoiles
+      star.addEventListener('mouseover', function () {
+        const value = this.getAttribute('data-value');
+        stars.forEach((s, index) => {
+          if (index < value) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+      });
+
+      // Effet pour revenir aux étoiles sélectionnées après un survol
+      star.addEventListener('mouseout', function () {
+        const currentRating = ratingInput.value;
+        stars.forEach((s, index) => {
+          if (index < currentRating) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+      });
+    });
+  });
+
+</script>
+
+</body>
+</html>

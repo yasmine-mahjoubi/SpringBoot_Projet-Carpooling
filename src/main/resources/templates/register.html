@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <style>
+        body {
+            background: linear-gradient(to right, #83a4d4, #b6fbff); /* Dégradé turquoise */
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+        .form-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            padding: 25px; /* Slightly increased padding for a better look */
+            margin-top: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            max-width: 420px; /* Slightly increased max-width */
+        }
+        .form-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .form-control {
+            height: 45px; /* Balanced input height */
+            font-size: 0.95rem; /* Slightly larger text size */
+        }
+        .btn-primary {
+            background-color: #4682b4;
+            border-color: #4682b4;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-primary:hover {
+            background-color: #5a9bd3;
+            transform: translateY(-3px);
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .register-link, .login-link {
+            text-align: center;
+            display: block;
+            margin-top: 15px;
+        }
+        .register-link a, .login-link a {
+            color: #4682b4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .register-link a:hover, .login-link a:hover {
+            color: #5a9bd3;
+        }
+
+        /*navbar*/
+        .navbar {
+            background-color: #ffffff; /* Fond blanc pour la navbar */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère sous la navbar */
+            border-bottom: 1px solid #e0e0e0; /* Ligne fine et discrète sous la navbar */
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #00aaff; /* Bleu clair pour la marque */
+            font-size: 1.5rem;
+        }
+
+        .navbar-brand i {
+            color: #00aaff; /* Icône de la marque en bleu clair */
+            margin-right: 8px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333333; /* Texte des liens en gris foncé */
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+        .navbar-nav .nav-link:hover {
+            background-color: #00d1b2; /* Survol turquoise */
+            border-radius: 5px; /* Coins arrondis */
+            color: white; /* Texte en blanc au survol */
+        }
+
+        .dropdown-menu {
+            background-color: #f8f9fa; /* Fond clair */
+            border: none; /* Retire la bordure */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        }
+
+        .dropdown-menu .nav-link {
+            color: #333;
+        }
+        .dropdown-menu .nav-link:hover {
+            background-color: #00aaff; /* Survol bleu clair */
+            color: white;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<!-- Inclure la Navbar -->
+<div th:replace="~{fragments :: header}"></div>
+
+<div class="container d-flex justify-content-center">
+    <div class="form-container">
+        <h2 class="text-center mb-4">Welcome</h2>
+        <h3 class="text-center mb-4">Let's create your Account</h3>
+        <form th:action="@{/register}" th:object="${user}" method="POST">
+            <div class="mb-3">
+                <label for="firstName" class="form-label">FirstName :</label>
+                <input type="text" th:field="*{firstName}" id="firstName" name="firstName" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">LastName :</label>
+                <input type="text" th:field="*{lastName}" id="lastName" name="lastName" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email :</label>
+                <input type="text" th:field="*{email}" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="phoneNumber" class="form-label">Phone Number :</label>
+                <input type="text" th:field="*{phoneNumber}" id="phoneNumber" name="phoneNumber" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" th:field="*{password}" id="password" name="password" class="form-control" required>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary w-50">Register</button>
+            </div>
+        </form>
+        <div class="login-link">
+            you have an account? <a href="/loginn">Login here</a>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Ride</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrapCSS/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="text-center">Save Ride</h2>
+    <form action="#" th:action="@{/saveRide}" th:object="${ride}" method="post" >
+        <input type="text" th:field="*{startLocation}" placeholder="start Location" class="form-control nb-4 col-4">
+        <input type="text" th:field="*{endLocation}" placeholder="end Location" class="form-control nb-4 col-4">
+        <input type="text" th:field="*{departureTime}" placeholder="start Location" class="form-control nb-4 col-4">
+        <input type="text" th:field="*{availableSeats}" placeholder="start Location" class="form-control nb-4 col-4">
+        <input type="text" th:field="*{pricePerSeat}" placeholder="start Location" class="form-control nb-4 col-4">
+
+    </form>
+</div>
+</body>
+</html>
