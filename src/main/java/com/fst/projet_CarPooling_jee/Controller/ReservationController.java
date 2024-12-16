@@ -29,11 +29,19 @@ public class ReservationController {
     @Autowired
     private UserRepository userRepository;
 
-    // Affiche la liste des réservations
+    // Affiche uniquement les réservations de l'utilisateur connecté
     @GetMapping("/reservations")
-    public String viewReservations(Model model) {
-        model.addAttribute("listReservations", reservationService.getAllReservations());
-        return "reservations"; // Vue HTML pour afficher les réservations
+    public String viewReservations(HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("loggedInUserId");
+
+        // Redirige si l'utilisateur n'est pas connecté
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+        // Récupérer les réservations de l'utilisateur
+        model.addAttribute("listReservations", reservationService.getReservationsByUserId(userId));
+        return "reservations"; // Vue Thymeleaf pour afficher les réservations
     }
 
     // Sauvegarde une nouvelle réservation

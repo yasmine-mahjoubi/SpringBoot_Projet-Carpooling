@@ -62,4 +62,10 @@ public class ReservationService {
         reservation.setNbReservedPlaces(reservedPlaces);
 
         reservationRepository.save(reservation);
-    }}
+    }
+    // Récupérer toutes les réservations d'un utilisateur spécifique
+    public List<Reservation> getReservationsByUserId(Long userId) {
+        return reservationRepository.findByUserId(userId);
+    }
+
+}
