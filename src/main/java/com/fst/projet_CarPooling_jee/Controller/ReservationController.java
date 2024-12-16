@@ -36,7 +36,7 @@ public class ReservationController {
 
         // Redirige si l'utilisateur n'est pas connecté
         if (userId == null) {
-            return "redirect:/login";
+            return "redirect:/loginn";
         }
 
         // Récupérer les réservations de l'utilisateur

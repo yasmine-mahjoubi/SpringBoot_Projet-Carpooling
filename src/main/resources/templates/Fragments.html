@@ -110,9 +110,11 @@
                 <a class="nav-link" th:href="@{Profile}" th:text="'Profile'">Profile</a>
               </li>
               <li class="nav-item" th:if="${loggedInUser != null}">
-                <a class="nav-link" th:href="@{myRides}" th:text="'MyRides'"><i class="fas fa-sign-out-alt"></i> My rides</a>
+                <a class="nav-link" th:href="@{myRides}" th:text="'My rides'"><i class="fas fa-sign-out-alt"></i> My rides</a>
               </li>
-
+              <li class="nav-item" th:if="${loggedInUser != null}">
+                <a class="nav-link" th:href="@{reservations}" th:text="'My reservations'"><i class="fas fa-sign-out-alt"></i> My reservations</a>
+              </li>
 
             </ul>
           </li>
