@@ -6,13 +6,44 @@
     <title>Drivers List</title>
     <link href="/css/bootstrapCSS/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* Global Styles */
+        /* Global Styles
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #02b3ba, #fba42e);
             margin: 0;
             padding: 0;
+        }*/
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #ffffff;
+            height: 70px;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #00aaff;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333333;
+            font-weight: 500;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: #00d1b2;
+            color: #ffffff;
+            border-radius: 5px;
+        }
+        .container-fluid{
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         /* Header Styles */
@@ -58,7 +89,7 @@
         .header {
             text-align: center;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #02b3ba, #fba42e);
             color: white;
         }
 
@@ -97,7 +128,7 @@
 
         /* User Card Styles */
         .user-card {
-            background: white;
+            background: linear-gradient(135deg, #02b3ba, #fba42e);
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
@@ -169,18 +200,9 @@
     </style>
 </head>
 <body>
-<!-- Main Header -->
-<header class="main-header">
-    <div class="logo">
-        <i class="fas fa-car"></i>
-        RideWave
-    </div>
-    <nav>
-        <a th:href="@{/}">Home</a>
-        <a th:href="@{/searchRides}">Search Rides</a>
-        <a th:href="@{/showNewRideForm}">Add Ride</a>
-    </nav>
-</header>
+<!-- Navbar -->
+
+<div th:replace="~{fragments :: header}"></div>
 
 <!-- Sub Header -->
 <div class="header">
@@ -191,10 +213,10 @@
 <!-- Cards Section -->
 <div class="cards-container">
     <div class="user-card" th:each="driver : ${drivers}">
-        <i class="fas fa-user-circle"></i>
+        <i class="fas fa-user-circle" style="color:#ffffff;"></i>
         <h3 th:text="${driver.firstName} + ' ' + ${driver.lastName}"></h3>
-        <p class="email"><i class="fas fa-envelope"></i><a th:href="'mailto:' + ${driver.email}" th:text="${driver.email}"></a></p>
-        <p><i class="fas fa-phone"></i><span th:text="${driver.phoneNumber}"></span></p>
+        <p class="email" style="color:#000000;"><i class="fas fa-envelope" style="color:#ffffff;"></i><a th:href="'mailto:' + ${driver.email}" th:text="${driver.email} " style="color:#000000;"></a></p>
+        <p><i class="fas fa-phone" style="color:#ffffff;"></i><span th:text="${driver.phoneNumber}"></span></p>
     </div>
 </div>
 

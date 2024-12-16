@@ -239,11 +239,18 @@
 <section class="reviews-section">
     <div class="container mt-5">
         <h2 class="text-center mb-4" style="color: #333;">What our users say</h2>
-        <div class="swiper">
-            <!-- Swiper Wrapper -->
-            <div class="swiper-wrapper">
+        <div id="reviewsCarousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#reviewsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#reviewsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#reviewsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+
+            <!-- Carousel Inner -->
+            <div class="carousel-inner">
                 <!-- Review Card 1 -->
-                <div class="swiper-slide">
+                <div class="carousel-item active">
                     <div class="review-card text-center p-4 shadow-sm">
                         <div class="circle-icon mb-3">
                             <i class="fas fa-user-circle fa-3x"></i>
@@ -259,8 +266,9 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Review Card 2 -->
-                <div class="swiper-slide">
+                <div class="carousel-item">
                     <div class="review-card text-center p-4 shadow-sm">
                         <div class="circle-icon mb-3">
                             <i class="fas fa-user-circle fa-3x"></i>
@@ -276,16 +284,39 @@
                         </div>
                     </div>
                 </div>
-                <!-- Ajoutez d'autres cartes ici -->
+
+                <!-- Review Card 3 -->
+                <div class="carousel-item">
+                    <div class="review-card text-center p-4 shadow-sm">
+                        <div class="circle-icon mb-3">
+                            <i class="fas fa-user-circle fa-3x"></i>
+                        </div>
+                        <h5 class="fw-bold">Ele Ben Ameur</h5>
+                        <p>"The best carpooling app out there! Great community and excellent service."</p>
+                        <div class="stars mb-2">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="far fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Swiper Pagination -->
-            <div class="swiper-pagination"></div>
-            <!-- Swiper Navigation -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
 </section>
+
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -312,5 +343,13 @@
         spaceBetween: 20, // Espacement entre les slides
     });
 </script>
+<script>
+    var carousel = document.querySelector('#reviewsCarousel');
+    var carouselInstance = new bootstrap.Carousel(carousel, {
+        interval: 3000, // Temps entre les slides (5000ms = 5 secondes)
+        ride: 'carousel'
+    });
+</script>
+
 </body>
 </html>
