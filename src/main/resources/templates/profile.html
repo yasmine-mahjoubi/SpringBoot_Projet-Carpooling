@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        body {
+        /*body {
             font-family: 'Roboto', sans-serif;
             background: #f6f9fa;
             color: #333;
@@ -21,6 +21,46 @@
             display: flex;
             justify-content: center;
             align-items: center;
+        }*/
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f6f9fa;
+            color: #333;
+            margin: 0;
+            min-height: 100vh;
+            padding-top: 70px; /* To avoid overlap with navbar */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #ffffff;
+            height: 70px;
+            position: fixed; /* Fix navbar at the top */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure navbar stays on top */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #00aaff;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333333;
+            font-weight: 500;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: #00d1b2;
+            color: #ffffff;
+            border-radius: 5px;
         }
 
         .profile-container {
@@ -196,7 +236,40 @@
     </style>
 </head>
 <body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <!-- Logo RideWave aligné à gauche -->
+        <a class="navbar-brand" href="/" style="font-size: 1.5rem; padding-left: 150px">RideWave</a>
 
+        <!-- Bouton pour collapse sur mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Liens alignés à droite -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/searchRides}">Search Ride</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/showNewRidesForm}">Publish Ride</a>
+                </li>
+                <!-- Dropdown pour le profil -->
+                <li class="nav-item dropdown" style="padding-right: 150px">
+                    <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle"></i> Account
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                        <li><a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="profile-container">
     <!-- Profile Header -->
     <div class="profile-header">
