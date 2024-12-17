@@ -103,6 +103,96 @@
                 transform: translateY(0);
             }
         }
+        /* Animation du modal */
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-content {
+            background: #fdfdff;
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            animation: modalFadeIn 0.4s ease-out;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            text-align: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-footer {
+            background: #f6f9fa;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        /* Champs du formulaire */
+        .form-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-control {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 0.6rem 0.75rem;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-control:focus {
+            border-color: #0072ff;
+            box-shadow: 0 0 8px rgba(0, 114, 255, 0.3);
+            outline: none;
+        }
+
+        /* Boutons */
+        .btn-primary {
+            background-color: #0072ff;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #005bb5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 114, 255, 0.3);
+        }
+
+        .btn-secondary {
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-secondary:hover {
+            background-color: #ddd;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
