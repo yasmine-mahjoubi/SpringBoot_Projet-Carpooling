@@ -144,11 +144,7 @@ public class UserController {
         }
 
         // Optionnel : Hachage du mot de passe
-    /*
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    String hashedPassword = passwordEncoder.encode(user.getPassword());
-    user.setPassword(hashedPassword);
-    */
+    
 
     // Sauvegarde du nouvel utilisateur
         userService.saveUser(user);
