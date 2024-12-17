@@ -1,6 +1,7 @@
 package com.fst.projet_CarPooling_jee.Controller;
 
 import com.fst.projet_CarPooling_jee.Entity.User;
+import com.fst.projet_CarPooling_jee.Service.impl.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,7 @@ public class UserController {
 
     //inject service class
     @Autowired
-    private com.fst.projet_CarPooling_jee.Service.impl.UserService userService;
-
+    private UserService userService;
 
     @ModelAttribute("loggedInUser")
     public User getLoggedInUser(HttpSession session) {
@@ -76,14 +76,43 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String showUserProfile(Model model, HttpSession session) {
-        User loggedInUser = (User) session.getAttribute("loggedInUser");
-        if (loggedInUser == null) {
-            // Si aucun utilisateur n'est connecté, rediriger vers la page de connexion
-            return "redirect:/loginn";
+    public String getProfile(HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("loggedInUserId");
+        if (userId == null) {
+            throw new RuntimeException("Aucun utilisateur connecté !");
         }
-        model.addAttribute("user", loggedInUser);
-        return "profile";  // Page de profil de l'utilisateur
+        User user = userService.getUserWithReviews(userId);
+        model.addAttribute("loggedInUser", user);
+        return "profile";
+    }
+
+    @PostMapping("/profile/update")
+    public String updateProfile(@RequestParam("firstName") String firstName,
+                                @RequestParam("lastName") String lastName,
+                                @RequestParam("email") String email,
+                                @RequestParam("phoneNumber") String phoneNumber,
+                                HttpSession session, Model model) {
+        // Récupérer l'utilisateur connecté depuis la session
+        Long userId = (Long) session.getAttribute("loggedInUserId");
+        if (userId == null) {
+            throw new RuntimeException("Utilisateur non connecté !");
+        }
+
+        // Mettre à jour les informations de l'utilisateur
+        User user = userService.findById(userId);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setPhoneNumber(phoneNumber);
+
+        // Sauvegarder dans la base de données
+        userService.updateUser(user);
+
+        // Ajouter les données mises à jour dans le modèle
+        model.addAttribute("loggedInUser", user);
+
+        // Retourner à la page de profil
+        return "redirect:/profile";
     }
 
     @GetMapping("/logout")

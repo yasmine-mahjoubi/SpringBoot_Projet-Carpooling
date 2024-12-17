@@ -2,9 +2,11 @@ package com.fst.projet_CarPooling_jee.Service.impl;
 
 import com.fst.projet_CarPooling_jee.Entity.User;
 import com.fst.projet_CarPooling_jee.Repository.UserRepository;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -55,6 +57,16 @@ public class UserService  {
     public User findById(long id)
     {
         return userRepository.findById(id) ;
+    }
+
+    @Transactional
+    public User getUserWithReviews(Long userId) {
+        return userRepository.findByIdWithReviews(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public void updateUser(User user) {
+        userRepository.save(user);
     }
 
 

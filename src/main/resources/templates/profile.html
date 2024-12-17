@@ -14,7 +14,7 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+            background: #f6f9fa;
             color: #333;
             margin: 0;
             min-height: 100vh;
@@ -32,6 +32,7 @@
             max-width: 800px;
             animation: fadeIn 1.2s ease-in-out;
         }
+
 
         .profile-header {
             background: linear-gradient(to right, #00c6ff, #0072ff);
@@ -133,20 +134,58 @@
         <div class="profile-info">
             <p><i class="fas fa-ticket-alt"></i>Reservations: <span th:text="${#lists.size(loggedInUser.reservations)}"></span></p>
         </div>
+        <!-- Button Edit Profile -->
+        <div class="text-center mt-4">
+            <button class="animated-btn" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>
+        </div>
 
-        <!-- Rating Stars -->
-        <div class="rating-container">
-            <p>Your Rating:</p>
-            <div class="stars">
-                <i class="fas fa-star" th:each="i : ${#numbers.sequence(1, 5)}"
-                   th:classappend="${i <= loggedInUser.averageRating} ? 'fas' : 'far'"></i>
+        <!-- Modal Edit Profile -->
+        <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form th:action="@{/profile/update}" method="post">
+                        <div class="modal-body">
+                            <!-- First Name -->
+                            <div class="mb-3">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First Name"
+                                       th:placeholder="${loggedInUser.firstName}" required>
+                            </div>
+
+                            <!-- Last Name -->
+                            <div class="mb-3">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last Name"
+                                       th:placeholder="${loggedInUser.lastName}" required>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Email"
+                                       th:placeholder="${loggedInUser.email}" required>
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div class="mb-3">
+                                <label for="phoneNumber" class="form-label">Phone Number</label>
+                                <input type="text" id="phoneNumber" name="phoneNumber" class="form-control"
+                                       placeholder="Phone Number" th:placeholder="${loggedInUser.phoneNumber}" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
-        <!-- Action Button -->
-        <div class="text-center mt-4">
-            <button class="animated-btn">Edit Profile</button>
-        </div>
     </div>
 </div>
 
