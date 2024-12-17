@@ -143,8 +143,6 @@ public class UserController {
         return "register";  // Retourne au formulaire d'inscription
         }
 
-        // Optionnel : Hachage du mot de passe
-    
 
     // Sauvegarde du nouvel utilisateur
         userService.saveUser(user);
