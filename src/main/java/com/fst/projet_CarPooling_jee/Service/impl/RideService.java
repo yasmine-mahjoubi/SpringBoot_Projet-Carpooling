@@ -1,5 +1,6 @@
 package com.fst.projet_CarPooling_jee.Service.impl;
 
+import com.fst.projet_CarPooling_jee.Entity.Reservation;
 import com.fst.projet_CarPooling_jee.Entity.Ride;
 import com.fst.projet_CarPooling_jee.Repository.RideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +79,11 @@ public class RideService {
 
     public Ride getRideById(Long RideID){
         return rideRepository.findRideById(RideID);
+    }
+
+    public void deleteRide(Long id) {
+        Ride ride = getRideById(id);
+        rideRepository.delete(ride);
     }
 
 }

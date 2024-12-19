@@ -33,5 +33,9 @@ public class ReviewService {
     public void deleteReviewById(Long id) {
         reviewRepository.deleteById(id);
     }
-}
 
+    public List<Review> findReviewsByRideId(Long rideId) {
+        return reviewRepository.findByRideId(rideId);
+    }
+
+}

@@ -1,8 +1,10 @@
 package com.fst.projet_CarPooling_jee.Controller;
 
+import com.fst.projet_CarPooling_jee.Entity.Review;
 import com.fst.projet_CarPooling_jee.Entity.Ride;
 import com.fst.projet_CarPooling_jee.Entity.User;
 import com.fst.projet_CarPooling_jee.Repository.UserRepository;
+import com.fst.projet_CarPooling_jee.Service.impl.ReviewService;
 import com.fst.projet_CarPooling_jee.Service.impl.RideService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class RideController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ReviewService reviewService;
 
 
 
@@ -231,6 +236,39 @@ public class RideController {
 
         return "searchRides";  // Return the view for displaying search results
     }
+
+    @PostMapping("/deleteRide")
+    public String deleteReservation(@RequestParam("id") Long id) {
+        rideService.deleteRide(id);
+        return "redirect:/myRides";
+    }
+
+    @GetMapping("/rideDetails/{id}")
+    public String showRideDetails(@PathVariable("id") Long rideId, Model model,HttpSession session) {
+        // Récupérer l'utilisateur depuis la base de données ou le service
+        User loggedInUser = (User) session.getAttribute("loggedInUser"); // Exemple
+        model.addAttribute("loggedInUser", loggedInUser);
+
+        Ride ride = rideService.getRideById(rideId);
+
+        if (ride == null) {
+            // Redirige vers une page d'erreur ou retourne un message approprié
+            System.out.println("ride not found");
+        }
+
+
+        List<Review> reviews = reviewService.findReviewsByRideId(rideId);
+        model.addAttribute("ride", ride);
+        model.addAttribute("reviews", reviews);
+
+        return "rideDetails";
+    }
+
+
+
+
+
+
 
 
 }
