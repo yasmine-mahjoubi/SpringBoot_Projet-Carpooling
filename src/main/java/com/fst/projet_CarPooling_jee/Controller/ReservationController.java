@@ -51,7 +51,7 @@ public class ReservationController {
                                   HttpSession session) {
         Long userId = (Long) session.getAttribute("loggedInUserId");
         if (userId == null) {
-            return "redirect:/login";
+            return "redirect:/loginn";
         }
         try {
             reservationService.saveReservation(rideId, userId, reservedPlaces);
